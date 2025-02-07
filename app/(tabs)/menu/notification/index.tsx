@@ -3,7 +3,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useNotification } from "@/context/NotificationContext";
 
-export default function HomeScreen() {
+export default function NotificationScreen() {
   const { expoPushToken, notification, error } = useNotification();
   if (error) {
     return <ThemedText>Error:{error.message}</ThemedText>
@@ -18,7 +18,12 @@ export default function HomeScreen() {
       }}
     >
       <SafeAreaView style={{ flex: 1 }}>
-         <ThemedText type="subtitle">Home screen</ThemedText>
+        <ThemedText type="subtitle">Notification screen</ThemedText>
+        <ThemedText type="subtitle">Latest notification:</ThemedText>
+        <ThemedText>{notification?.request.content.subtitle}</ThemedText>
+        <ThemedText>
+          {JSON.stringify(notification?.request.content.data, null, 2)}
+        </ThemedText>
       </SafeAreaView>
     </ThemedView>
   );

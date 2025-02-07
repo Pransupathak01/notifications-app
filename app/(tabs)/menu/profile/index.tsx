@@ -1,9 +1,10 @@
-import { Platform, SafeAreaView, StatusBar } from "react-native";
+import { Platform, SafeAreaView, StatusBar, TouchableOpacity } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useNotification } from "@/context/NotificationContext";
+import { router } from "expo-router";
 
-export default function HomeScreen() {
+export default function ProfileScreen() {
   const { expoPushToken, notification, error } = useNotification();
   if (error) {
     return <ThemedText>Error:{error.message}</ThemedText>
@@ -18,7 +19,13 @@ export default function HomeScreen() {
       }}
     >
       <SafeAreaView style={{ flex: 1 }}>
-         <ThemedText type="subtitle">Home screen</ThemedText>
+        <ThemedText type="subtitle">Profile Screen</ThemedText>
+        <ThemedText>{expoPushToken}</ThemedText>
+        <ThemedText type="subtitle">Latest notification:</ThemedText>
+        <ThemedText>{notification?.request.content.subtitle}</ThemedText>
+        <ThemedText>
+          {JSON.stringify(notification?.request.content.data, null, 2)}
+        </ThemedText>
       </SafeAreaView>
     </ThemedView>
   );
